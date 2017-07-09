@@ -12,7 +12,7 @@
 */
 
 use Illuminate\Http\Request;
-use Cookie;
+use Illuminate\Cookie\CookieJar;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,14 +45,11 @@ Route::get('/callback', function (Request $request, CookieJar $cookieJar) {
     ]);
 
     $data = json_decode((string) $response->getBody(), true);
-    Cookie::queue('token', $data['token'], 15);
+    $cookieJar->queue(cookie('token', $data['token'], 450000));
     return $data;
 });
 
 Route::get('/user', function (Request $request) {
-    
-    $token = Cookie::get('token');
-    dd($token);
 
     $http = new GuzzleHttp\Client;
     $response = $http->get('https://passport.leovel.com/api/user', [
