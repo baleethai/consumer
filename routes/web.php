@@ -42,8 +42,9 @@ Route::get('/callback', function (Request $request) {
 			'code'          => $request->code,
         ],
     ]);
-    dd($response->getBody());
-    // return json_decode((string) $response->getBody(), true);
+
+    dd(json_decode((string) $response->getBody(), true));
+
 });
 
 Route::get('/user', function (Request $request) {
