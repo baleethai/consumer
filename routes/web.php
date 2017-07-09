@@ -26,19 +26,19 @@ Route::get('/redirect', function () {
 		'scope'         => '',
     ]);
 
-    return redirect('http://oauth.leovel.com/oauth/authorize?'.$query);
+    return redirect('https://passport.leovel.com/oauth/authorize?'.$query);
 });
 
 Route::get('/callback', function (Request $request) {
 
     $http = new GuzzleHttp\Client;
 
-    $response = $http->post('http://oauth.leovel.com/oauth/token', [
+    $response = $http->post('https://passport.leovel.com/oauth/token', [
         'form_params' => [
 			'grant_type'    => 'authorization_code',
 			'client_id'     => '3',
 			'client_secret' => 'Z5v5G3pJea7XoL3toX452NPb7qOT7u5OQ8f3D9wC',
-			'redirect_uri'  => 'http://web.leovel.com/callback',
+			'redirect_uri'  => 'https://web.leovel.com/callback',
 			'code'          => $request->code,
         ],
     ]);
