@@ -44,9 +44,7 @@ Route::get('/callback', function (Request $request, CookieJar $cookieJar) {
         ],
     ]);
 
-    $data = json_decode((string) $response->getBody(), true);
-    $cookieJar->queue(cookie('token', $data['token'], 450000));
-    return $data;
+    return json_decode((string) $response->getBody(), true);
 });
 
 Route::get('/user', function (Request $request) {
