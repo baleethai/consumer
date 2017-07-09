@@ -50,6 +50,8 @@ Route::get('/callback', function (Request $request, CookieJar $cookieJar) {
 });
 
 Route::get('/user', function (Request $request) {
+    
+    $token = '';
 
     $http = new GuzzleHttp\Client;
     $response = $http->get('https://passport.leovel.com/api/user', [
