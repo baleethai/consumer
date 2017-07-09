@@ -17,28 +17,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
+Route::get('/redirect', function () {
 
     $query = http_build_query([
 		'client_id'     => '3',
-		'redirect_uri'  => 'http://consumer.app/callback',
+		'redirect_uri'  => 'https://web.leovel.com/callback',
 		'response_type' => 'code',
 		'scope'         => '',
     ]);
 
-    return redirect('http://oauth.app/oauth/authorize?'.$query);
+    return redirect('http://oauth.leovel.com/oauth/authorize?'.$query);
 });
 
 Route::get('/callback', function (Request $request) {
 
     $http = new GuzzleHttp\Client;
 
-    $response = $http->post('http://oauth.app/oauth/token', [
+    $response = $http->post('http://oauth.leovel.com/oauth/token', [
         'form_params' => [
 			'grant_type'    => 'authorization_code',
 			'client_id'     => '3',
-			'client_secret' => 'RHiYGEsbPpWKzkMbse2UDMsORxcDpFa44nqCWZGN',
-			'redirect_uri'  => 'http://consumer.app/callback',
+			'client_secret' => 'Z5v5G3pJea7XoL3toX452NPb7qOT7u5OQ8f3D9wC',
+			'redirect_uri'  => 'http://web.leovel.com/callback',
 			'code'          => $request->code,
         ],
     ]);
